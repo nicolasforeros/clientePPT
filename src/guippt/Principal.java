@@ -5,18 +5,36 @@
  */
 package guippt;
 
+import co.edu.autonoma.interfaces.InterfazJuego;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Manuela Cardona
  */
-public class Principal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame implements InterfazJuego{
 
+    private Jugador jugador;
+    private final ImageIcon ICONO_PIEDRA;
+    private final ImageIcon ICONO_PAPEL;
+    private final ImageIcon ICONO_TIJERAS;
+    private final ImageIcon ICONO_PUNODER;
+    private final ImageIcon ICONO_PUNODEROK;
+    
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Principal(Jugador jugador) {
         initComponents();
-        this.setLocationRelativeTo(null);
+        
+        this.jugador = jugador;
+        
+        this.ICONO_PIEDRA = new javax.swing.ImageIcon(getClass().getResource("/imagenes/PiedraG.png"));
+        this.ICONO_PAPEL = new javax.swing.ImageIcon(getClass().getResource("/imagenes/PapelG.png"));
+        this.ICONO_TIJERAS = new javax.swing.ImageIcon(getClass().getResource("/imagenes/TijeraG.png"));
+        this.ICONO_PUNODER = new javax.swing.ImageIcon(getClass().getResource("/imagenes/PuñoDer.png"));
+        this.ICONO_PUNODEROK = new javax.swing.ImageIcon(getClass().getResource("/imagenes/PuñoDerOK.png"));
     }
 
     /**
@@ -42,6 +60,9 @@ public class Principal extends javax.swing.JFrame {
         labelImgJug2 = new javax.swing.JLabel();
         labelVS = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        btnNuevaPartida = new javax.swing.JButton();
+        btnTerminarPartida = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,6 +78,7 @@ public class Principal extends javax.swing.JFrame {
         labelImgTijera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Tijera.png"))); // NOI18N
 
         btnPiedra.setText("Piedra");
+        btnPiedra.setEnabled(false);
         btnPiedra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPiedraActionPerformed(evt);
@@ -64,8 +86,20 @@ public class Principal extends javax.swing.JFrame {
         });
 
         btnPapel.setText("Papel");
+        btnPapel.setEnabled(false);
+        btnPapel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPapelActionPerformed(evt);
+            }
+        });
 
         btnTijera.setText("Tijera");
+        btnTijera.setEnabled(false);
+        btnTijera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTijeraActionPerformed(evt);
+            }
+        });
 
         labelComenzarJuego.setFont(new java.awt.Font("Pristina", 1, 36)); // NOI18N
         labelComenzarJuego.setForeground(new java.awt.Color(255, 255, 255));
@@ -74,11 +108,13 @@ public class Principal extends javax.swing.JFrame {
 
         labelJugador1.setFont(new java.awt.Font("Pristina", 1, 24)); // NOI18N
         labelJugador1.setForeground(new java.awt.Color(255, 255, 255));
-        labelJugador1.setText("Jugador 1:");
+        labelJugador1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelJugador1.setText("Yo");
 
         labelJugador2.setFont(new java.awt.Font("Pristina", 1, 24)); // NOI18N
         labelJugador2.setForeground(new java.awt.Color(255, 255, 255));
-        labelJugador2.setText("Jugador 2:");
+        labelJugador2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelJugador2.setText("Esperando Rival");
 
         labelImgJug1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/PuñoIzq.png"))); // NOI18N
 
@@ -89,6 +125,23 @@ public class Principal extends javax.swing.JFrame {
         labelVS.setText("VS");
 
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
+
+        btnNuevaPartida.setText("Nueva Partida");
+        btnNuevaPartida.setEnabled(false);
+        btnNuevaPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevaPartidaActionPerformed(evt);
+            }
+        });
+
+        btnTerminarPartida.setText("Terminar Partida");
+        btnTerminarPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminarPartidaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -104,8 +157,10 @@ public class Principal extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(72, 72, 72)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelImgJug1))
+                                    .addComponent(labelImgJug1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(28, 28, 28)
+                                        .addComponent(labelJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(labelVS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -120,23 +175,37 @@ public class Principal extends javax.swing.JFrame {
                                         .addComponent(btnPapel)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(labelImgPapel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(64, 64, 64)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelImgJug2)
-                            .addComponent(labelJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(labelImgTijera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnTijera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(64, 64, 64)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelImgJug2)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(labelImgTijera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnTijera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(labelJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(17, 17, 17)))
                 .addGap(25, 25, 25))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(216, 216, 216)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTerminarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnNuevaPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
                 .addComponent(labelComenzarJuego)
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,9 +220,9 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelImgJug2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(labelImgJug1, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelImgTijera)
                     .addComponent(labelImgPapel)
@@ -163,7 +232,13 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(btnPiedra)
                     .addComponent(btnPapel)
                     .addComponent(btnTijera))
-                .addGap(28, 28, 28))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNuevaPartida)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(btnTerminarPartida)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,7 +249,9 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -182,18 +259,54 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnPiedraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiedraActionPerformed
         // TODO add your handling code here:
+        this.jugador.jugarPiedra();
     }//GEN-LAST:event_btnPiedraActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaPartidaActionPerformed
+        // TODO add your handling code here:
+        this.jugador.enviarMensajeNuevaPartida();
+    }//GEN-LAST:event_btnNuevaPartidaActionPerformed
+
+    private void btnTerminarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarPartidaActionPerformed
+        // TODO add your handling code here:
+        this.jugador.enviarMensajeTerminarPartida();
+    }//GEN-LAST:event_btnTerminarPartidaActionPerformed
+
+    private void btnPapelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPapelActionPerformed
+        // TODO add your handling code here:
+        this.jugador.jugarPapel();
+    }//GEN-LAST:event_btnPapelActionPerformed
+
+    private void btnTijeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTijeraActionPerformed
+        // TODO add your handling code here:
+        this.jugador.jugarTijeras();
+    }//GEN-LAST:event_btnTijeraActionPerformed
+
+    public void iniciarEntrada(){   
+        this.jugador.iniciarRedEntrada(this);
+    }
+    
+    private void habilitarBotonesJuego(){
+        this.btnPapel.setEnabled(true);
+        this.btnTijera.setEnabled(true);
+        this.btnPiedra.setEnabled(true);
+    }
+    
+    private void deshabilitarBotonesJuego(){
+        this.btnPapel.setEnabled(false);
+        this.btnTijera.setEnabled(false);
+        this.btnPiedra.setEnabled(false);
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnNuevaPartida;
     private javax.swing.JButton btnPapel;
     private javax.swing.JButton btnPiedra;
+    private javax.swing.JButton btnTerminarPartida;
     private javax.swing.JButton btnTijera;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel labelComenzarJuego;
     private javax.swing.JLabel labelImgJug1;
     private javax.swing.JLabel labelImgJug2;
@@ -204,4 +317,49 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel labelJugador2;
     private javax.swing.JLabel labelVS;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void empezarJuego(String nombreRival) {
+        this.labelJugador2.setText(nombreRival);
+        
+        this.labelImgJug2.setIcon(this.ICONO_PUNODER);
+        
+        this.habilitarBotonesJuego();
+        this.btnNuevaPartida.setEnabled(false);
+    }
+
+    @Override
+    public void terminarJuego(String nombreGanador, int jugadaRival) {
+        
+        switch(jugadaRival){
+            case InterfazJuego.PAPEL:
+                this.labelImgJug2.setIcon(this.ICONO_PAPEL);
+                break;
+            case InterfazJuego.PIEDRA:
+                this.labelImgJug2.setIcon(this.ICONO_PIEDRA);
+                break;
+            case InterfazJuego.TIJERA:
+                this.labelImgJug2.setIcon(this.ICONO_TIJERAS);
+                break;
+            default:
+                break;
+        }
+        
+        this.labelComenzarJuego.setText("¡Ganaste "+ nombreGanador +"!");
+        
+        this.deshabilitarBotonesJuego();
+        this.btnNuevaPartida.setEnabled(true);
+    }
+
+    @Override
+    public void cerrarPartida() {
+        JOptionPane.showMessageDialog(this, "Se ha cerrado la sesión de juego");
+        
+        this.dispose();
+    }
+
+    @Override
+    public void rivalOK() {
+        this.labelImgJug2.setIcon(this.ICONO_PUNODEROK);
+    }
 }

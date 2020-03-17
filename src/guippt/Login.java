@@ -5,18 +5,23 @@
  */
 package guippt;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Manuela Cardona
  */
 public class Login extends javax.swing.JFrame {
 
+    Jugador jugador;
+    
     /**
      * Creates new form Login
      */
-    public Login() {
+    public Login(Jugador jugador) {
         initComponents();
-        this.setLocationRelativeTo(null);
+        
+        this.jugador = jugador;
     }
 
     /**
@@ -148,44 +153,33 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtFIpActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        Principal principal = new Principal();
-        principal.setVisible(true); 
-    }//GEN-LAST:event_btnEntrarActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        
+        String nombreJugador = txtFNombre.getText();
+        
+        this.jugador.setNombre(nombreJugador);
+        
+        this.jugador.setIpServidor(txtFIp.getText());
+        
+        if(this.jugador.getNombre().trim().isEmpty() | this.jugador.getIpServidor().trim().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Completar los datos del login", "Login", JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
-        });
-    }
+        
+        boolean conexion = this.jugador.conectarAServidor();
+        
+        if(conexion){
+            Principal principal = new Principal(jugador);
+            
+            principal.setLocationRelativeTo(null);
+            principal.setVisible(true);
+            principal.iniciarEntrada();
+            
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Error conectando con el servidor solicitado", "Conexión", JOptionPane.INFORMATION_MESSAGE);
+        } 
+        
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEntrar;
