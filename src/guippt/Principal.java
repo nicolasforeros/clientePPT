@@ -5,6 +5,7 @@
  */
 package guippt;
 
+import co.edu.autonoma.actores.Jugador;
 import co.edu.autonoma.interfaces.InterfazJuego;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
     private final ImageIcon ICONO_PAPEL;
     private final ImageIcon ICONO_TIJERAS;
     private final ImageIcon ICONO_PUNODER;
+    private final ImageIcon ICONO_PUNOIZQ;
     private final ImageIcon ICONO_PUNODEROK;
     
     /**
@@ -33,6 +35,7 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
         this.ICONO_PIEDRA = new javax.swing.ImageIcon(getClass().getResource("/imagenes/PiedraG.png"));
         this.ICONO_PAPEL = new javax.swing.ImageIcon(getClass().getResource("/imagenes/PapelG.png"));
         this.ICONO_TIJERAS = new javax.swing.ImageIcon(getClass().getResource("/imagenes/TijeraG.png"));
+        this.ICONO_PUNOIZQ = new javax.swing.ImageIcon(getClass().getResource("/imagenes/PuñoIzq.png"));
         this.ICONO_PUNODER = new javax.swing.ImageIcon(getClass().getResource("/imagenes/PuñoDer.png"));
         this.ICONO_PUNODEROK = new javax.swing.ImageIcon(getClass().getResource("/imagenes/PuñoDerOK.png"));
     }
@@ -155,15 +158,6 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(labelImgJug1)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(28, 28, 28)
-                                        .addComponent(labelJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labelVS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(107, 107, 107)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnPiedra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -174,7 +168,16 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
                                         .addGap(10, 10, 10)
                                         .addComponent(btnPapel)
                                         .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(labelImgPapel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(labelImgPapel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(labelImgJug1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(labelVS, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(labelJugador1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(64, 64, 64)
@@ -184,9 +187,9 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
                                         .addComponent(labelImgTijera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnTijera, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(labelJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(17, 17, 17)))
+                                .addGap(1, 1, 1)
+                                .addComponent(labelJugador2, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(4, 4, 4)))
                 .addGap(25, 25, 25))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,18 +211,16 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
                 .addGap(18, 18, 18)
                 .addComponent(labelComenzarJuego)
                 .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labelJugador2)
+                    .addComponent(labelJugador1))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(labelImgJug2, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(labelImgJug1, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addComponent(labelVS))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelJugador1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelJugador2, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labelImgJug2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelImgJug1, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(44, 44, 44)
+                        .addComponent(labelVS)))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
@@ -260,6 +261,7 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
     private void btnPiedraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPiedraActionPerformed
         // TODO add your handling code here:
         this.jugador.jugarPiedra();
+        this.deshabilitarBotonesJuego();
     }//GEN-LAST:event_btnPiedraActionPerformed
 
     private void btnNuevaPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaPartidaActionPerformed
@@ -269,21 +271,30 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
 
     private void btnTerminarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarPartidaActionPerformed
         // TODO add your handling code here:
-        this.jugador.enviarMensajeTerminarPartida();
+        int opcion = JOptionPane.showConfirmDialog(this, 
+                        "¿Está seguro que desea terminar la sesión de juego?", 
+                        "Confirmación", JOptionPane.YES_NO_OPTION);
+        
+        if(opcion==JOptionPane.YES_OPTION){
+            this.jugador.enviarMensajeTerminarPartida();
+        }      
     }//GEN-LAST:event_btnTerminarPartidaActionPerformed
 
     private void btnPapelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPapelActionPerformed
         // TODO add your handling code here:
         this.jugador.jugarPapel();
+        this.deshabilitarBotonesJuego();
     }//GEN-LAST:event_btnPapelActionPerformed
 
     private void btnTijeraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTijeraActionPerformed
         // TODO add your handling code here:
         this.jugador.jugarTijeras();
+        this.deshabilitarBotonesJuego();
     }//GEN-LAST:event_btnTijeraActionPerformed
 
     public void iniciarEntrada(){   
         this.jugador.iniciarRedEntrada(this);
+        this.jugador.enviarMensajeNuevaPartida();
     }
     
     private void habilitarBotonesJuego(){
@@ -319,9 +330,14 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void empezarJuego(String nombreRival) {
-        this.labelJugador2.setText(nombreRival);
+    public void empezarJuego(String nombreYo, String nombreRival) {
         
+        this.labelComenzarJuego.setText("¡Que comience el juego!");
+        
+        this.labelJugador1.setText("Yo: " + nombreYo);
+        this.labelJugador2.setText("Rival: " + nombreRival);
+        
+        this.labelImgJug1.setIcon(this.ICONO_PUNOIZQ);
         this.labelImgJug2.setIcon(this.ICONO_PUNODER);
         
         this.habilitarBotonesJuego();
@@ -329,7 +345,21 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
     }
 
     @Override
-    public void terminarJuego(String nombreGanador, int jugadaRival) {
+    public void terminarJuego(String nombreGanador,int jugadaYo, int jugadaRival) {
+        
+        switch(jugadaYo){
+            case InterfazJuego.PAPEL:
+                this.labelImgJug1.setIcon(this.ICONO_PAPEL);
+                break;
+            case InterfazJuego.PIEDRA:
+                this.labelImgJug1.setIcon(this.ICONO_PIEDRA);
+                break;
+            case InterfazJuego.TIJERA:
+                this.labelImgJug1.setIcon(this.ICONO_TIJERAS);
+                break;
+            default:
+                break;
+        }
         
         switch(jugadaRival){
             case InterfazJuego.PAPEL:
@@ -345,9 +375,11 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
                 break;
         }
         
-        this.labelComenzarJuego.setText("¡Ganaste "+ nombreGanador +"!");
-        
-        this.deshabilitarBotonesJuego();
+        if(nombreGanador.equals("empate")){
+            this.labelComenzarJuego.setText("¡Es un empate!");
+        }else{
+            this.labelComenzarJuego.setText("¡El ganador es "+ nombreGanador +"!");            
+        }
         this.btnNuevaPartida.setEnabled(true);
     }
 
@@ -361,5 +393,23 @@ public class Principal extends javax.swing.JFrame implements InterfazJuego{
     @Override
     public void rivalOK() {
         this.labelImgJug2.setIcon(this.ICONO_PUNODEROK);
+    }
+
+    @Override
+    public void seleccionarJugada(int jugada) {
+        switch(jugada){
+            case InterfazJuego.PAPEL:
+                this.labelImgJug1.setIcon(this.ICONO_PAPEL);
+                break;
+            case InterfazJuego.PIEDRA:
+                this.labelImgJug1.setIcon(this.ICONO_PIEDRA);
+                break;
+            case InterfazJuego.TIJERA:
+                this.labelImgJug1.setIcon(this.ICONO_TIJERAS);
+                break;
+            default:
+                System.out.println("PRINCIPAL=> no existe la jugada enviada");
+                break;
+        }
     }
 }

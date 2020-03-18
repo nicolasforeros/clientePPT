@@ -6,6 +6,7 @@
 package guippt;
 
 import javax.swing.JOptionPane;
+import co.edu.autonoma.actores.Jugador;
 
 /**
  *
@@ -173,6 +174,7 @@ public class Login extends javax.swing.JFrame {
             principal.setLocationRelativeTo(null);
             principal.setVisible(true);
             principal.iniciarEntrada();
+            //principal.iniciarJuego();
             
             this.dispose();
         }else{

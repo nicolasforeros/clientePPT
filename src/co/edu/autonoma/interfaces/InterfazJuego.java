@@ -11,16 +11,27 @@ package co.edu.autonoma.interfaces;
  */
 public interface InterfazJuego {
     
+    public static final int TERMINAR=-2; 
+    public static final int INICIO=-1; 
     public static final int PIEDRA=0; 
     public static final int PAPEL=1; 
     public static final int TIJERA=2;
+    public static final int NUEVA_PARTIDA=3;
     
-    public void empezarJuego(String nombreRival);
+    public static final int ESTADO_PREPARADO=4;
+    public static final int ESTADO_NO_PREPARADO=5;
+    public static final int ESTADO_J1OK_J2NO=6;
+    public static final int ESTADO_J1NO_J2OK=7;
+    public static final int ESTADO_J1OK_J2OK=8;
+    
+    public void empezarJuego(String nombreYo, String nombreRival);
     
     public void rivalOK();
     
-    public void terminarJuego(String nombreGanador, int jugadaRival);
+    public void terminarJuego(String nombreGanador, int jugadaYo, int jugadaRival);
     
     public void cerrarPartida();
+
+    public void seleccionarJugada(int jugada);
     
 }
